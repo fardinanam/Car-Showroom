@@ -35,7 +35,6 @@ public class Main extends Application {
         window.show();
     }
 
-    //TODO: Implement the method
     void showViewersPage() throws IOException {
         // Loading viewers.fxml
         FXMLLoader loader = new FXMLLoader();
@@ -52,14 +51,20 @@ public class Main extends Application {
         window.show();
     }
 
-    // TODO: Implement this method
-    void showManufacturersLoginPage() {
+    void showManufacturersPage() throws IOException {
+        // Loading manufacturer.fxml
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("manufacturer.fxml"));
+        Parent root = loader.load();
 
-    }
+        // Loading controller of manufacturer.fxml and setting the Main to it
+        ManufacturerController controller = loader.getController();
+        controller.setMain(this);
 
-    //TODO: Implement the method
-    void showManufacturersPage() {
-
+        // Showing login page in the window
+        window.setTitle("Manufacturer");
+        window.setScene(new Scene(root, 800, 600));
+        window.show();
     }
 
     public static void main(String[] args) {

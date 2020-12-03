@@ -38,7 +38,7 @@
             <TableView prefHeight="524.0" prefWidth="760.0" />
             <HBox alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="760.0">
                <children>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="15.0" prefWidth="105.0" text="Cancel" />
+                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="15.0" prefWidth="105.0" text="Back" />
                </children>
             </HBox>
          </children>

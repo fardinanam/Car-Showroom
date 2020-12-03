@@ -1,5 +1,5 @@
 * {
-    -fx-font-family: "Open Sans", "sans-serif";
+    -fx-font-family: "Open Sans Condensed", "sans-serif";
 }
 #loginContainer {
     -fx-background-color: #cbf1f1;
@@ -27,11 +27,11 @@
     -fx-text-fill: white;
 }
 .button {
-    -fx-pref-width: 150px;
-    -fx-pref-height: 40px;
+    -fx-pref-width: 80px;
+    -fx-pref-height: 15px;
     -fx-background-radius: 20px;
     -fx-background-color: #173f5f;
-    -fx-font-size: 16px;
+    -fx-font-size: 12px;
     -fx-text-fill: white;
     /*-fx-font-weight: bold;*/
 }
@@ -40,10 +40,10 @@
     -fx-background-color: #20639b;
 }
 
-#searchButton, #loginButton, #cancelButton {
-    -fx-pref-width: 80px;
-    -fx-pref-height: 15px;
-    -fx-font-size: 12px;
+#viewerButton, #manufacturerButton {
+    -fx-pref-width: 150px;
+    -fx-pref-height: 40px;
+    -fx-font-size: 16px;
 }
 #loginButton {
     -fx-background-color: #03776c;
@@ -51,7 +51,7 @@
 #loginButton:hover {
     -fx-background-color: #3caea3;
 }
-#cancelButton {
+#cancelButton, #logoutButton {
     -fx-background-color: #c80303;
 }
 
@@ -74,17 +74,17 @@
     -fx-border-width: 1px;
     -fx-border-color: white;
     -fx-padding: 0px;
-    -fx-border-radius: 15px 15px 15px 15px;
-    -fx-background-radius: 15px 15px 15px 15px;
+    -fx-border-radius: 10px 10px 10px 10px;
+    -fx-background-radius: 10px 10px 10px 10px;
     /*-fx-text-fill: white; */
 }
 .combo-box .list-view .list-cell {
     -fx-border-width: 1px;
     /*-fx-border-color: black;*/
-    -fx-border-radius: 15px 15px 15px 15px;
-    -fx-background-radius: 15px 15px 15px 15px;
+    -fx-border-radius: 10px 10px 10px 10px;
+    -fx-background-radius: 10px 10px 10px 10px;
 }
 .combo-box .list-view .list-cell:selected {
-    -fx-background-color: white;
+    -fx-background-color: #d7d6d6;
     -fx-text-fill: black;
 }

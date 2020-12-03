@@ -1,0 +1,90 @@
+* {
+    -fx-font-family: "Open Sans", "sans-serif";
+}
+#loginContainer {
+    -fx-background-color: #cbf1f1;
+}
+#viewerContainer {
+    -fx-background-color: #eaeaea;
+}
+
+.table-view {
+    -fx-background-color: #474747;
+    -fx-background-radius: 10px;
+}
+.table-view .column-header-background {
+    -fx-background-color: #575757;
+    -fx-background-radius: 10px;
+    -fx-background-insets: 0 0 10 0;
+    -fx-padding: 0 0 10 0;
+}
+.table-view .column-header, .table-view .filler {
+    -fx-cell-size: 40;
+    -fx-border-width: 0 0 10 0;
+    -fx-background-color: transparent;
+}
+.table-view .column-header .label {
+    -fx-text-fill: white;
+}
+.button {
+    -fx-pref-width: 150px;
+    -fx-pref-height: 40px;
+    -fx-background-radius: 20px;
+    -fx-background-color: #173f5f;
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    /*-fx-font-weight: bold;*/
+}
+
+.button:hover {
+    -fx-background-color: #20639b;
+}
+
+#searchButton, #loginButton, #cancelButton {
+    -fx-pref-width: 80px;
+    -fx-pref-height: 15px;
+    -fx-font-size: 12px;
+}
+#loginButton {
+    -fx-background-color: #03776c;
+}
+#loginButton:hover {
+    -fx-background-color: #3caea3;
+}
+#cancelButton {
+    -fx-background-color: #c80303;
+}
+
+#cancelButton:hover {
+    -fx-background-color: #ed553b;
+}
+.text-field {
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-background-color: #fff;
+    /*-fx-border-color: #2eacef;*/
+}
+.combo-box{
+    -fx-background-radius: 15px;
+    -fx-background-color: skyblue;
+    -fx-text-fill: #fff;
+}
+
+.combo-box .list-view{
+    -fx-border-width: 1px;
+    -fx-border-color: white;
+    -fx-padding: 0px;
+    -fx-border-radius: 15px 15px 15px 15px;
+    -fx-background-radius: 15px 15px 15px 15px;
+    /*-fx-text-fill: white; */
+}
+.combo-box .list-view .list-cell {
+    -fx-border-width: 1px;
+    /*-fx-border-color: black;*/
+    -fx-border-radius: 15px 15px 15px 15px;
+    -fx-background-radius: 15px 15px 15px 15px;
+}
+.combo-box .list-view .list-cell:selected {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}

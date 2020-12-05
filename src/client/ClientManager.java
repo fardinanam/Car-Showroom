@@ -7,20 +7,52 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ClientManager extends Thread {
+    private static ClientManager instance;
     private static final int PORT = 12121;
+
     private Socket socket;
+    private BufferedReader inputFromServer;
+    private PrintWriter requestToServer;
+
+    private ClientManager() {
+        try {
+            socket = new Socket("localhost", PORT);
+            inputFromServer = new BufferedReader(
+                    new InputStreamReader(socket.getInputStream()));
+            requestToServer = new PrintWriter(
+                    socket.getOutputStream(), true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        start();
+    }
+
     @Override
     public void run() {
-        try (Socket socket = new Socket("localhost", PORT)) {
-            BufferedReader inputFromServer = new BufferedReader(
-                    new InputStreamReader(socket.getInputStream()));
-            PrintWriter requestToServer = new PrintWriter(
-                    socket.getOutputStream(), true);
+        try {
             while (true) {
-
+                String serverResponse = inputFromServer.readLine();
+                System.out.println("Server message: " + serverResponse);
+                // TODO: Handle all server responses
+                if(serverResponse.equals("exit")) {
+                    inputFromServer.close();
+                    requestToServer.close();
+                    socket.close();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ClientManager getInstance() {
+        if(instance == null) {
+            instance = new ClientManager();
+        }
+        return instance;
+    }
+
+    public void sendRequest(String request) {
+        requestToServer.println(request);
     }
 }

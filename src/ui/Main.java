@@ -43,6 +43,7 @@ public class Main extends Application {
 
         // Loading controller of viewer.fxml and setting the Main to it
         ViewerController controller = loader.getController();
+        controller.init();
         controller.setMain(this);
 
         // Showing login page in the window
@@ -59,6 +60,7 @@ public class Main extends Application {
 
         // Loading controller of manufacturer.fxml and setting the Main to it
         ManufacturerController controller = loader.getController();
+        controller.init();
         controller.setMain(this);
 
         // Showing login page in the window

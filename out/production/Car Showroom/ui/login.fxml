@@ -25,8 +25,9 @@
          <children>
             <VBox fx:id="loginVbox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
-                  <Label text="Login As" />
+                  <Label text="Enter as" />
                   <Button fx:id="viewerButton" mnemonicParsing="false" onAction="#handleViewerButton" text="Viewer" />
+                  <Label text="Or login as" />
                   <Button fx:id="manufacturerButton" mnemonicParsing="false" onAction="#handleManufacturerButton" text="Manufacturer">
                      <VBox.margin>
                         <Insets />

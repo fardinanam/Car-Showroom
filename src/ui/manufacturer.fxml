@@ -17,13 +17,16 @@
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="55.0" prefWidth="760.0" spacing="5.0">
                <children>
-                  <ComboBox fx:id="searchOptions" prefHeight="25.0" prefWidth="138.0" value="Registration">
+                  <ComboBox fx:id="searchOptions" onAction="#handleSearchOptions" prefHeight="25.0" prefWidth="146.0">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
-                           <String fx:value="Registration" />
+                           <String fx:value="Registration No." />
                            <String fx:value="Make, Model" />
                         </FXCollections>
                      </items>
+                     <value>
+                        <String fx:value="Registration No." />
+                     </value>
                   </ComboBox>
                   <TextField fx:id="searchText" prefHeight="25.0" prefWidth="558.0" />
                   <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="25.0" prefWidth="113.0" text="Search" />

@@ -9,16 +9,14 @@
 }
 
 .table-view {
-    /*-fx-background-color: #474747;*/
     -fx-background-color: white;
     -fx-background-radius: 10px;
 }
 .table-view .column-header-background {
-    /*-fx-background-color: #575757;*/
     -fx-background-color: #dddcdc;
     -fx-background-radius: 10px;
-    -fx-background-insets: 0 0 10 0;
-    -fx-padding: 0 0 10 0;
+    /*-fx-background-insets: 0 0 10 0;*/
+    /*-fx-padding: 0 0 10 0;*/
 }
 .table-view .column-header, .table-view .filler {
     -fx-cell-size: 40;
@@ -35,11 +33,17 @@
     -fx-pref-width: 80px;
     -fx-pref-height: 15px;
     -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
     -fx-background-color: #173f5f;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
+    /*-fx-background-color: white;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-text-fill: black;*/
 }
+
 
 .button:hover {
     -fx-background-color: #20639b;
@@ -61,13 +65,12 @@
 }
 
 #cancelButton:hover, #logoutButton:hover {
-    -fx-background-color: #ed553b;
+    -fx-background-color: #fa0000;
 }
 .text-field {
     -fx-background-radius: 15px;
     -fx-border-radius: 15px;
     -fx-background-color: #fff;
-    /*-fx-border-color: #2eacef;*/
 }
 .combo-box{
     -fx-background-radius: 15px;

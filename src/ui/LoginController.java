@@ -1,5 +1,6 @@
 package ui;
 
+import client.ClientManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -7,7 +8,6 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -51,13 +51,16 @@ public class LoginController {
         this.main = main;
     }
 
-    public void handleLoginButton(ActionEvent actionEvent) {
+    public void handleLoginButton(ActionEvent actionEvent) throws InterruptedException {
         String un = username.getText();
         String pass = password.getText();
+        String request = "LIN," + un + "," + pass;
 
-        if(un.equals("admin") && pass.equals("123")) {
+        ClientManager.getInstance().sendRequest(request);
+        // TODO implement login properly
+        /*if(request.equals("LIN,admin,123")) {
             try {
-                main.showManufacturersPage();
+                main.showManufacturersPage("admin");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -74,7 +77,7 @@ public class LoginController {
             dialogPane.getStyleClass().add("myAlert");
 
             alert.showAndWait();
-        }
+        }*/
     }
 
     public void handleCancelButton(ActionEvent actionEvent) {

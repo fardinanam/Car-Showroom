@@ -1,5 +1,7 @@
 package client;
 
+import ui.Main;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,20 +11,21 @@ import java.net.Socket;
 public class ClientManager extends Thread {
     private static ClientManager instance;
     private static final int PORT = 12121;
+    private Main main;
 
     private Socket socket;
-    private BufferedReader inputFromServer;
+    private BufferedReader responseFromServer;
     private PrintWriter requestToServer;
 
     private ClientManager() {
         try {
             socket = new Socket("localhost", PORT);
-            inputFromServer = new BufferedReader(
+            responseFromServer = new BufferedReader(
                     new InputStreamReader(socket.getInputStream()));
             requestToServer = new PrintWriter(
                     socket.getOutputStream(), true);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Exception: " + e.getMessage());
         }
         start();
     }
@@ -30,23 +33,36 @@ public class ClientManager extends Thread {
     @Override
     public void run() {
         try {
+            /* Any server response is processed from here */
             while (true) {
-                String serverResponse = inputFromServer.readLine();
+                String serverResponse = responseFromServer.readLine();
                 System.out.println("Server message: " + serverResponse);
                 // TODO: Handle all server responses
                 if(serverResponse.equals("exit")) {
-                    inputFromServer.close();
-                    requestToServer.close();
-                    socket.close();
+                    break;
                 }
+                handleServerResponse(serverResponse);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Exception: " + e.getMessage());
+        } finally {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                System.out.println("Exception: " + e.getMessage());
+            }
+        }
+    }
+
+    private void handleServerResponse(String serverResponse) throws IOException {
+        if(serverResponse.contains("login successful")) {
+            String username = serverResponse.split(",")[1];
+            main.showManufacturersPage(username);
         }
     }
 
     public static ClientManager getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new ClientManager();
         }
         return instance;
@@ -54,5 +70,9 @@ public class ClientManager extends Thread {
 
     public void sendRequest(String request) {
         requestToServer.println(request);
+    }
+
+    public void setMain(Main main) {
+        this.main = main;
     }
 }

@@ -2,26 +2,27 @@ package ui;
 
 import client.ClientManager;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.Socket;
 
 public class Main extends Application {
     Stage window;
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        ClientManager.getInstance();
-
+    public void start(Stage primaryStage) throws Exception {
+        ClientManager.getInstance().setMain(this);
         window = primaryStage;
         showLoginPage();
     }
     /**
      * Changes the scene to Login page
      */
-    void showLoginPage() throws IOException {
+    public void showLoginPage() throws IOException {
         // Loading login.fxml
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("login.fxml"));
@@ -38,7 +39,7 @@ public class Main extends Application {
         window.show();
     }
 
-    void showViewersPage() throws IOException {
+    public void showViewersPage() throws IOException {
         // Loading viewers.fxml
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("viewer.fxml"));
@@ -55,7 +56,7 @@ public class Main extends Application {
         window.show();
     }
 
-    void showManufacturersPage() throws IOException {
+    public void showManufacturersPage(String username) throws IOException {
         // Loading manufacturer.fxml
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("manufacturer.fxml"));
@@ -67,9 +68,14 @@ public class Main extends Application {
         controller.setMain(this);
 
         // Showing login page in the window
-        window.setTitle("Manufacturer");
+        window.setTitle(username);
         window.setScene(new Scene(root, 800, 600));
         window.show();
+    }
+
+    @Override
+    public void stop() {
+        ClientManager.getInstance().sendRequest("exit");
     }
 
     public static void main(String[] args) {

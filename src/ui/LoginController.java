@@ -1,6 +1,5 @@
 package ui;
 
-import client.ClientManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -37,7 +36,7 @@ public class LoginController {
      */
     public void handleViewerButton(ActionEvent actionEvent) {
         try {
-            main.showViewersPage();
+            main.showViewAndManageCarsPage("Viewer");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,11 +55,11 @@ public class LoginController {
         String pass = password.getText();
         String request = "LIN," + un + "," + pass;
 
-        ClientManager.getInstance().sendRequest(request);
+//        ClientManager.getInstance().sendRequest(request);
         // TODO implement login properly
-        /*if(request.equals("LIN,admin,123")) {
+        if(request.equals("LIN,admin,123")) {
             try {
-                main.showManufacturersPage("admin");
+                main.showViewAndManageCarsPage("admin");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -77,7 +76,7 @@ public class LoginController {
             dialogPane.getStyleClass().add("myAlert");
 
             alert.showAndWait();
-        }*/
+        }
     }
 
     public void handleCancelButton(ActionEvent actionEvent) {

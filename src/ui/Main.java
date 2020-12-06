@@ -2,16 +2,14 @@ package ui;
 
 import client.ClientManager;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.Socket;
 
-public class Main extends Application {
+public class Main extends Application{
     Stage window;
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -35,41 +33,24 @@ public class Main extends Application {
 
         // Showing login page in the window
         window.setTitle("Login");
-        window.setScene(new Scene(root, 800, 600));
+        window.setScene(new Scene(root, 850, 600));
         window.show();
     }
 
-    public void showViewersPage() throws IOException {
-        // Loading viewers.fxml
+    public void showViewAndManageCarsPage(String username) throws IOException {
+        // Loading viewAndManageCars.fxml
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("viewer.fxml"));
+        loader.setLocation(getClass().getResource("viewAndManageCars.fxml"));
         Parent root = loader.load();
 
-        // Loading controller of viewer.fxml and setting the Main to it
-        ViewerController controller = loader.getController();
-        controller.init();
-        controller.setMain(this);
-
-        // Showing login page in the window
-        window.setTitle("Viewer");
-        window.setScene(new Scene(root, 800, 600));
-        window.show();
-    }
-
-    public void showManufacturersPage(String username) throws IOException {
-        // Loading manufacturer.fxml
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("manufacturer.fxml"));
-        Parent root = loader.load();
-
-        // Loading controller of manufacturer.fxml and setting the Main to it
-        ManufacturerController controller = loader.getController();
-        controller.init();
+        // Loading controller of viewAndManageCars.fxml and setting the Main to it
+        ViewAndManageCarsController controller = loader.getController();
+        controller.init(username);
         controller.setMain(this);
 
         // Showing login page in the window
         window.setTitle(username);
-        window.setScene(new Scene(root, 800, 600));
+        window.setScene(new Scene(root, 850, 600));
         window.show();
     }
 

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="viewerContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@uiStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ManufacturerController">
+<StackPane fx:id="viewerContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="830.0" stylesheets="@uiStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ViewAndManageCarsController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
          <children>
@@ -35,7 +35,7 @@
                   <Insets top="5.0" />
                </padding>
             </HBox>
-            <TableView prefHeight="524.0" prefWidth="760.0" />
+            <TableView fx:id="tableView" prefHeight="524.0" prefWidth="760.0" />
             <HBox alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="760.0" spacing="5.0">
                <children>
                   <Button fx:id="addCarButton" mnemonicParsing="false" onAction="#handleAddCar" text="Add Car" />

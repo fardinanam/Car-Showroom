@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane fx:id="loginContainer" alignment="center" hgap="10" stylesheets="@uiStyles.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.LoginController">
+<GridPane fx:id="loginContainer" alignment="center" hgap="10" prefHeight="600.0" prefWidth="850.0" stylesheets="@uiStyles.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.LoginController">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -21,9 +21,10 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <StackPane prefHeight="600.0" prefWidth="800.0">
+      <HBox prefHeight="100.0" prefWidth="200.0" />
+      <StackPane prefHeight="600.0" prefWidth="1078.0">
          <children>
-            <VBox fx:id="loginVbox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+            <VBox fx:id="loginVbox" alignment="CENTER" prefHeight="600.0" prefWidth="675.0" spacing="5.0">
                <children>
                   <Label text="Enter as" />
                   <Button fx:id="viewerButton" mnemonicParsing="false" onAction="#handleViewerButton" text="Viewer" />
@@ -31,22 +32,23 @@
                   <Button fx:id="manufacturerButton" mnemonicParsing="false" onAction="#handleManufacturerButton" text="Manufacturer">
                      <VBox.margin>
                         <Insets />
-                     </VBox.margin></Button>
-                  <AnchorPane fx:id="loginOptions" prefHeight="153.0" prefWidth="600.0">
+                     </VBox.margin>
+                  </Button>
+                  <AnchorPane fx:id="loginOptions" prefHeight="153.0" prefWidth="1041.0">
                      <children>
-                        <HBox alignment="CENTER" layoutY="15.0" prefHeight="55.0" prefWidth="800.0">
+                        <HBox alignment="CENTER" layoutY="15.0" prefHeight="55.0" prefWidth="850.0">
                            <children>
                               <Label prefHeight="24.0" prefWidth="68.0" text="Username:" />
                               <TextField fx:id="username" prefHeight="27.0" prefWidth="198.0" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" layoutY="55.0" prefHeight="55.0" prefWidth="800.0">
+                        <HBox alignment="CENTER" layoutY="55.0" prefHeight="55.0" prefWidth="850.0">
                            <children>
                               <Label prefHeight="17.0" prefWidth="68.0" text="Password:" />
                               <PasswordField fx:id="password" prefHeight="27.0" prefWidth="198.0" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" layoutY="110.0" prefHeight="40.0" prefWidth="800.0" spacing="5.0">
+                        <HBox alignment="CENTER" layoutY="110.0" prefHeight="40.0" prefWidth="850.0" spacing="5.0">
                            <children>
                               <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginButton" text="Login" />
                               <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" text="Cancel" />

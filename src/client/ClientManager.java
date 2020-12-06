@@ -57,7 +57,7 @@ public class ClientManager extends Thread {
     private void handleServerResponse(String serverResponse) throws IOException {
         if(serverResponse.contains("login successful")) {
             String username = serverResponse.split(",")[1];
-            main.showManufacturersPage(username);
+            main.showViewAndManageCarsPage(username);
         }
     }
 

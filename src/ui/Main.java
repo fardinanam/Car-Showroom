@@ -5,6 +5,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -53,7 +55,20 @@ public class Main extends Application{
         window.setScene(new Scene(root, 850, 600));
         window.show();
     }
+    public void showAlertForInvalidLogin() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Incorrect Credentials");
+        alert.setHeaderText("Incorrect Credentials");
+        alert.setContentText("The username and password did not match.");
 
+        // Adding stylesheet to Alert box to add my own styles
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+        getClass().getResource("uiStyles.css").toExternalForm());
+        dialogPane.getStyleClass().add("myAlert");
+
+        alert.showAndWait();
+    }
     @Override
     public void stop() {
         ClientManager.getInstance().sendRequest("exit");

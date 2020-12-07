@@ -2,6 +2,7 @@ package ui;
 
 import data.Car;
 import data.CarObservableList;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ViewAndManageCarsController {
     @FXML
@@ -59,10 +61,15 @@ public class ViewAndManageCarsController {
                 }
             }
         });
-
     }
-    // TODO
+    // TODO: implement search option
     public void handleSearchButton(ActionEvent actionEvent) {
+        /* CAN BE IMPLEMENTED THIS WAY
+        Car car = CarObservableList.getInstance().getCarList().get(2);
+        ObservableList<Car> list = FXCollections.observableArrayList();
+        list.add(car);
+        tableView.setItems(list);
+        */
     }
 
     public void handleSearchOptions(ActionEvent actionEvent) {

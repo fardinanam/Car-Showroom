@@ -1,5 +1,6 @@
 package client;
 
+import javafx.application.Platform;
 import ui.Main;
 
 import java.io.BufferedReader;
@@ -37,7 +38,6 @@ public class ClientManager extends Thread {
             while (true) {
                 String serverResponse = responseFromServer.readLine();
                 System.out.println("Server message: " + serverResponse);
-                // TODO: Handle all server responses
                 if(serverResponse.equals("exit")) {
                     break;
                 }
@@ -54,10 +54,39 @@ public class ClientManager extends Thread {
         }
     }
 
+    // TODO: Handle all server responses
     private void handleServerResponse(String serverResponse) throws IOException {
-        if(serverResponse.contains("login successful")) {
-            String username = serverResponse.split(",")[1];
-            main.showViewAndManageCarsPage(username);
+        String code = serverResponse.substring(0, 3);
+        if(code.equals("LIN")) {
+            handleLogin(serverResponse);
+        }
+    }
+
+    /**
+     * @param serverResponse contains comma separated information where first word = LIN
+     * second word contains login approval and third word is the username of the user
+     */
+    private void handleLogin(String serverResponse) {
+        String[] responses = serverResponse.split(",");
+        if(responses[1].equals("login successful")) {
+            String username = responses[2];
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        main.showViewAndManageCarsPage(username);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    main.showAlertForInvalidLogin();
+                }
+            });
         }
     }
 

@@ -1,5 +1,6 @@
 package ui;
 
+import client.ClientManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -55,28 +56,13 @@ public class LoginController {
         String pass = password.getText();
         String request = "LIN," + un + "," + pass;
 
-//        ClientManager.getInstance().sendRequest(request);
-        // TODO implement login properly
-        if(request.equals("LIN,admin,123")) {
-            try {
-                main.showViewAndManageCarsPage("admin");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if(un == null || pass == null || un.equals("") || pass.equals("")) {
+            main.showAlertForInvalidLogin();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Incorrect Credentials");
-            alert.setHeaderText("Incorrect Credentials");
-            alert.setContentText("The username and password did not match.");
-
-            // Adding stylesheet to Alert box to add my own styles
-            DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(
-                    getClass().getResource("uiStyles.css").toExternalForm());
-            dialogPane.getStyleClass().add("myAlert");
-
-            alert.showAndWait();
+            ClientManager.getInstance().sendRequest(request);
         }
+        username.setText("");
+        password.setText("");
     }
 
     public void handleCancelButton(ActionEvent actionEvent) {

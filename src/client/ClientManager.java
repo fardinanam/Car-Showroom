@@ -1,5 +1,7 @@
 package client;
 
+import data.Car;
+import data.CarObservableList;
 import javafx.application.Platform;
 import ui.Main;
 
@@ -59,6 +61,8 @@ public class ClientManager extends Thread {
         String code = serverResponse.substring(0, 3);
         if(code.equals("LIN")) {
             handleLogin(serverResponse);
+        } else if (code.equals("car")) {
+            handleAddCar(serverResponse.substring(4));
         }
     }
 
@@ -88,6 +92,15 @@ public class ClientManager extends Thread {
                 }
             });
         }
+    }
+
+    private void handleAddCar(String carInfoString) {
+        String[] carInfo = carInfoString.split(",");
+        String colors = carInfo[2] + "," + carInfo[3] + "," + carInfo[4];
+        Car car = new Car(carInfo[0], carInfo[1], colors,
+                carInfo[5], carInfo[6], carInfo[7], carInfo[8]);
+//        System.out.println(car);
+        CarObservableList.getInstance().addCar(car);
     }
 
     public static ClientManager getInstance() {

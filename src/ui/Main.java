@@ -61,7 +61,7 @@ public class Main extends Application{
         alert.setHeaderText("Incorrect Credentials");
         alert.setContentText("The username and password did not match.");
 
-        // Adding stylesheet to Alert box to add my own styles
+        // Adding uiStyles.css Alert box to add my own styles
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.getStylesheets().add(
         getClass().getResource("uiStyles.css").toExternalForm());

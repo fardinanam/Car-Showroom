@@ -1,6 +1,7 @@
 package data;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
 
 public class Car {
@@ -44,31 +45,59 @@ public class Car {
         return carInfo.toString();
     }
 
-    public String getReg() {
+    public final String getReg() {
         return reg.get();
     }
 
-    public String getYear() {
+    public final String getYear() {
         return year.get();
     }
 
-    public String getColors() {
+    public final String getColors() {
         return colors.get();
     }
 
-    public String getMake() {
+    public final SimpleStringProperty regProperty() {
+        return reg;
+    }
+
+    public final SimpleStringProperty yearProperty() {
+        return year;
+    }
+
+    public final SimpleStringProperty colorsProperty() {
+        return colors;
+    }
+
+    public final SimpleStringProperty makeProperty() {
+        return make;
+    }
+
+    public final SimpleStringProperty modelProperty() {
+        return model;
+    }
+
+    public final SimpleStringProperty priceProperty() {
+        return price;
+    }
+
+    public final SimpleStringProperty quantityProperty() {
+        return quantity;
+    }
+
+    public final String getMake() {
         return make.get();
     }
 
-    public String getModel() {
+    public final String getModel() {
         return model.get();
     }
 
-    public String getPrice() {
+    public final String getPrice() {
         return price.get();
     }
 
-    public String getQuantity() {
+    public final String getQuantity() {
         return quantity.get();
     }
 

@@ -21,4 +21,8 @@ public class CarObservableList {
         }
         return instance;
     }
+
+    public void addCar(Car car) {
+        carList.add(car);
+    }
 }

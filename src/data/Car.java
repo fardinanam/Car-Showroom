@@ -1,7 +1,6 @@
 package data;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
 
 public class Car {
@@ -31,7 +30,7 @@ public class Car {
         // TODO: make setOnAction for all the buttons
     }
 
-    @Override
+    /*@Override
     public String toString() {
         StringBuilder carInfo = new StringBuilder();
         carInfo.append("Registration Number: " + reg + "\n");
@@ -43,63 +42,79 @@ public class Car {
         carInfo.append("Price: " + price + "\n");
 
         return carInfo.toString();
-    }
+    }*/
 
-    public final String getReg() {
+    public String getReg() {
         return reg.get();
     }
 
-    public final String getYear() {
+    public String getYear() {
         return year.get();
     }
 
-    public final String getColors() {
+    public String getColors() {
         return colors.get();
     }
 
-    public final SimpleStringProperty regProperty() {
-        return reg;
-    }
-
-    public final SimpleStringProperty yearProperty() {
-        return year;
-    }
-
-    public final SimpleStringProperty colorsProperty() {
-        return colors;
-    }
-
-    public final SimpleStringProperty makeProperty() {
-        return make;
-    }
-
-    public final SimpleStringProperty modelProperty() {
-        return model;
-    }
-
-    public final SimpleStringProperty priceProperty() {
-        return price;
-    }
-
-    public final SimpleStringProperty quantityProperty() {
-        return quantity;
-    }
-
-    public final String getMake() {
+    public String getMake() {
         return make.get();
     }
 
-    public final String getModel() {
+    public String getModel() {
         return model.get();
     }
 
-    public final String getPrice() {
+    public String getPrice() {
         return price.get();
     }
 
-    public final String getQuantity() {
+    public String getQuantity() {
         return quantity.get();
     }
 
-    // TODO: allow edit options
+    @Override
+    public String toString() {
+        return reg + "," + year + "," + colors + "," + make + "," + model
+                + "," + price + "," + quantity;
+    }
+    public Button getEditButton() {
+        return editButton;
+    }
+
+    public Button getDeleteButton() {
+        return deleteButton;
+    }
+
+    public Button getBuyButton() {
+        return buyButton;
+    }
+
+    public void setReg(String reg) {
+        this.reg.set(reg);
+    }
+
+    public void setYear(String year) {
+        this.year.set(year);
+    }
+
+    public void setColors(String colors) {
+        this.colors.set(colors);
+    }
+
+    public void setMake(String make) {
+        this.make.set(make);
+    }
+
+    public void setModel(String model) {
+        this.model.set(model);
+    }
+
+    public void setPrice(String price) {
+        this.price.set(price);
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity.set(quantity);
+    }
+// TODO: allow edit options
 }

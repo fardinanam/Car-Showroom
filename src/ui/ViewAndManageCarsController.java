@@ -2,21 +2,27 @@ package ui;
 
 import data.Car;
 import data.CarObservableList;
-import javafx.collections.FXCollections;
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.io.IOException;
-import java.util.List;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class ViewAndManageCarsController {
     @FXML
-    private TableView tableView;
-
+    private TableView<Car> tableView;
+    private ObservableList<Car> data;
     @FXML
     private Button addCarButton;
     @FXML
@@ -28,13 +34,14 @@ public class ViewAndManageCarsController {
 
     public void init(String username) {
         this.username = username;
+        setTableView();
         if(username.equals("Viewer")) {
             addCarButton.setManaged(false);
             addCarButton.managedProperty().bind(addCarButton.visibleProperty());
             addCarButton.setVisible(false);
         }
+        // TODO: Call search options properly
         handleSearchOptions(null);
-        setTableView();
     }
     public void setMain(Main main) {
         this.main = main;
@@ -78,53 +85,134 @@ public class ViewAndManageCarsController {
     }
 
     private void setTableView() {
-        TableColumn<Car, String> regNoCol = new TableColumn<>("Registration No.");
-        regNoCol.setMinWidth(120);
-        regNoCol.setCellValueFactory(new PropertyValueFactory<>("reg"));
+        TableColumn<Car, String> regCol = new TableColumn<>("Registration No.");
+        regCol.setMinWidth(120);
+        regCol.setCellValueFactory(new PropertyValueFactory<>("reg"));
 
+        /*regCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Car, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Car, String> c) {
+                if(c.getValue() != null && c.getValue().getReg() != null) {
+                    return new SimpleStringProperty(c.getValue().getReg());
+                } else {
+                    return new SimpleStringProperty("NULL");
+                }
+            }
+        });*/
         TableColumn<Car, String> yearCol = new TableColumn<>("Year");
         yearCol.setMinWidth(90);
         yearCol.setCellValueFactory(new PropertyValueFactory<>("year"));
+
+        /*yearCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Car, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Car, String> c) {
+                if(c.getValue() != null && c.getValue().getYear() != null) {
+                    return new SimpleStringProperty(c.getValue().getYear());
+                } else {
+                    return new SimpleStringProperty("NULL");
+                }
+            }
+        });*/
 
         TableColumn<Car, String> colorsCol = new TableColumn<>("Colors");
         colorsCol.setMinWidth(90);
         colorsCol.setCellValueFactory(new PropertyValueFactory<>("colors"));
 
+        /*colorsCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Car, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Car, String> c) {
+                if(c.getValue() != null && c.getValue().getColors() != null) {
+                    return new SimpleStringProperty(c.getValue().getColors());
+                } else {
+                    return new SimpleStringProperty("NULL");
+                }
+            }
+        });*/
+
         TableColumn<Car, String> makeCol = new TableColumn<>("Make");
         makeCol.setMinWidth(90);
         makeCol.setCellValueFactory(new PropertyValueFactory<>("make"));
+
+        /*makeCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Car, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Car, String> c) {
+                if(c.getValue() != null && c.getValue().getMake() != null) {
+                    return new SimpleStringProperty(c.getValue().getMake());
+                } else {
+                    return new SimpleStringProperty("NULL");
+                }
+            }
+        });*/
 
         TableColumn<Car, String> modelCol = new TableColumn<>("Model");
         modelCol.setMinWidth(90);
         modelCol.setCellValueFactory(new PropertyValueFactory<>("model"));
 
+        /*modelCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Car, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Car, String> c) {
+                if(c.getValue() != null && c.getValue().getModel() != null) {
+                    return new SimpleStringProperty(c.getValue().getModel());
+                } else {
+                    return new SimpleStringProperty("NULL");
+                }
+            }
+        });*/
+
         TableColumn<Car, String> priceCol = new TableColumn<>("Price");
         priceCol.setMinWidth(90);
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        TableColumn<Car, String> quantityCol = new TableColumn<>("Quantity");
-        priceCol.setMinWidth(90);
-        priceCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        /*priceCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Car, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Car, String> c) {
+                if(c.getValue() != null && c.getValue().getPrice() != null) {
+                    return new SimpleStringProperty(c.getValue().getPrice());
+                } else {
+                    return new SimpleStringProperty("NULL");
+                }
+            }
+        });*/
 
-        tableView.getColumns().addAll(regNoCol, yearCol, colorsCol,
+        TableColumn<Car, String> quantityCol = new TableColumn<>("Quantity");
+        quantityCol.setMinWidth(90);
+        quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+
+        /*quantityCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Car, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Car, String> c) {
+                if(c.getValue() != null && c.getValue().getQuantity() != null) {
+                    return new SimpleStringProperty(c.getValue().getQuantity());
+                } else {
+                    return new SimpleStringProperty("NULL");
+                }
+            }
+        });*/
+
+        tableView.getColumns().addAll(regCol, yearCol, colorsCol,
                 makeCol, modelCol, priceCol, quantityCol);
         if(!username.equals("Viewer")) {
-            TableColumn<Car, String> editButtonCol = new TableColumn<>("Edit");
+            TableColumn<Car, Button> editButtonCol = new TableColumn<>("Edit");
             editButtonCol.setMinWidth(90);
             editButtonCol.setCellValueFactory(new PropertyValueFactory<>("editButton"));
 
-            TableColumn<Car, String> deleteButtonCol = new TableColumn<>("Delete");
+            TableColumn<Car, Button> deleteButtonCol = new TableColumn<>("Delete");
             deleteButtonCol.setMinWidth(90);
             deleteButtonCol.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
 
             tableView.getColumns().addAll(editButtonCol, deleteButtonCol);
         } else {
-            TableColumn<Car, String> buyButtonCol = new TableColumn<>("Buy");
+            TableColumn<Car, Button> buyButtonCol = new TableColumn<>("Buy");
             buyButtonCol.setMinWidth(90);
             buyButtonCol.setCellValueFactory(new PropertyValueFactory<>("buyButton"));
+
             tableView.getColumns().add(buyButtonCol);
         }
         tableView.setEditable(true);
         tableView.setItems(CarObservableList.getInstance().getCarList());
+        /*data = FXCollections.observableArrayList(
+                new Car("1234", "2020", "RED", "BMW", "M16", "20000", "1")
+        );
+        tableView.setItems(data);*/
     }
 }

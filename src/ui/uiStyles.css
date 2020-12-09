@@ -14,9 +14,10 @@
 }
 .table-view .column-header-background {
     -fx-background-color: #dddcdc;
-    -fx-background-radius: 10px;
-    /*-fx-background-insets: 0 0 10 0;*/
-    /*-fx-padding: 0 0 10 0;*/
+    -fx-background-radius: 15px;
+    -fx-min-height: 25px;
+    -fx-background-insets: 0 0 5 0;
+    -fx-padding: 0 0 10 0;
 }
 .table-view .column-header, .table-view .filler {
     -fx-cell-size: 40;
@@ -28,19 +29,27 @@
 .table-view .column-header:last-child, .table-view .filler {
     -fx-border-width: 0 0 0 0;
 }
+
 .table-view .column-header .label {
     /*-fx-text-fill: white;*/
 }
+.table-row-cell {
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-max-height: 10px;
+    -fx-background-insets: 0 0 0 0;
+}
+
 .label {
     -fx-font-weight: bold;
 }
 .button {
     -fx-pref-width: 80px;
-    -fx-pref-height: 15px;
+    -fx-pref-height: 10px;
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
     -fx-background-color: #173f5f;
-    -fx-font-size: 12px;
+    -fx-font-size: 10px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
     /*-fx-background-color: white;
@@ -53,20 +62,30 @@
 .button:hover {
     -fx-background-color: #20639b;
 }
+.button:hover, .combo-box:hover, .text-field:hover,
+.button:focused, .combo-box:focused, .text-field:focused{
+    -fx-effect: dropshadow(gaussian, black, 6, 0, 1, 1);
+
+}
 
 #viewerButton, #manufacturerButton {
-    -fx-pref-width: 150px;
+    -fx-pref-width: 200px;
     -fx-pref-height: 40px;
     -fx-font-size: 16px;
 }
 #loginButton {
     -fx-background-color: #03776c;
+    -fx-font-size: 12px;
 }
 #loginButton:hover {
     -fx-background-color: #3caea3;
 }
 #cancelButton, #logoutButton {
     -fx-background-color: #c80303;
+    -fx-font-size: 12px;
+}
+#addCarButton, #searchButton, #viewAllButton {
+    -fx-font-size: 12px;
 }
 
 #cancelButton:hover, #logoutButton:hover {

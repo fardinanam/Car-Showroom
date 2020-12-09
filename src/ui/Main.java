@@ -35,7 +35,7 @@ public class Main extends Application{
 
         // Showing login page in the window
         window.setTitle("Login");
-        window.setScene(new Scene(root, 850, 600));
+        window.setScene(new Scene(root, 900, 600));
         window.show();
     }
 
@@ -52,7 +52,7 @@ public class Main extends Application{
 
         // Showing login page in the window
         window.setTitle(username);
-        window.setScene(new Scene(root, 850, 600));
+        window.setScene(new Scene(root, 900, 600));
         window.show();
     }
     public void showAlertForInvalidLogin() {

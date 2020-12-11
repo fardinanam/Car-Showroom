@@ -3,10 +3,7 @@ package ui;
 import client.ClientManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -23,6 +20,8 @@ public class LoginController {
     private TextField username;
     @FXML
     private PasswordField password;
+    @FXML
+    private Button loginButton;
 
     public void init() {
         // The following three lines help the vbox to align it's children to center
@@ -45,6 +44,7 @@ public class LoginController {
 
     public void handleManufacturerButton(ActionEvent actionEvent) {
         loginOptions.setVisible(true);
+        loginButton.setDefaultButton(true);
     }
 
     public void setMain(Main main) {

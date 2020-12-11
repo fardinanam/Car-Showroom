@@ -23,6 +23,7 @@ public class ClientManager extends Thread {
     private ClientManager() {
         try {
             socket = new Socket("localhost", PORT);
+
             responseFromServer = new BufferedReader(
                     new InputStreamReader(socket.getInputStream()));
             requestToServer = new PrintWriter(

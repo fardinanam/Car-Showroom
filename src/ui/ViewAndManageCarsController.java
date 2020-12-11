@@ -7,12 +7,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.StackPane;
+
 import java.io.IOException;
+import java.util.Optional;
 
 
 public class ViewAndManageCarsController {
+    @FXML
+    private StackPane viewerContainer;
     @FXML
     private Button viewAllButton;
     @FXML
@@ -34,15 +40,18 @@ public class ViewAndManageCarsController {
             addCarButton.managedProperty().bind(addCarButton.visibleProperty());
             addCarButton.setVisible(false);
         }
-        // TODO: Call search options properly
+        // Showing initial prompt text in search bar
         handleSearchOptions(null);
     }
     public void setMain(Main main) {
         this.main = main;
     }
-    // TODO
+
     public void handleAddCar(ActionEvent actionEvent) {
+        showAddEditDialog();
     }
+
+    @FXML
     public void handleLogoutButton(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Logout");
@@ -65,6 +74,7 @@ public class ViewAndManageCarsController {
         });
     }
 
+    @FXML
     public void handleSearchButton(ActionEvent actionEvent) {
         ObservableList<Car> list = FXCollections.observableArrayList();
         String search = searchText.getText();
@@ -104,14 +114,49 @@ public class ViewAndManageCarsController {
         }
     }
 
+    @FXML
     public void handleViewAllButton() {
         tableView.setItems(CarObservableList.getInstance().getCarList());
         viewAllButton.setDisable(true);
 
     }
 
+    @FXML
     public void handleSearchOptions(ActionEvent actionEvent) {
         searchText.setPromptText("Search by " + searchOptions.getValue());
+    }
+
+    /**
+     * Loading the dialog when add or edit button is pressed
+     */
+    public void showAddEditDialog() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(viewerContainer.getScene().getWindow());
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("addEditDialog.fxml"));
+
+        try {
+            dialog.getDialogPane().setContent(loader.load());
+        } catch (IOException e) {
+            System.out.println("Couldn't load dialog");
+            e.printStackTrace();
+            return;
+        }
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+        dialog.getDialogPane().getScene().getStylesheets().add(
+                getClass().getResource("uiStyles.css").toExternalForm());
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            AddEditDialogController dialogController = loader.getController();
+            dialogController.validateInfo();
+            System.out.println("Okay pressed");
+        } else {
+            System.out.println("Cancel pressed");
+        }
     }
 
     private void setTableView() {

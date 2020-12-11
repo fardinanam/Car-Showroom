@@ -1,15 +1,22 @@
 package ui;
 
+import client.ClientManager;
+import data.Car;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddEditDialogController implements Initializable {
+    @FXML
+    private Button addCarButton;
     @FXML
     private TextField regText;
     @FXML
@@ -36,12 +43,43 @@ public class AddEditDialogController implements Initializable {
         quantityText.setPromptText("Number Field");
     }
 
-    private static enum AlertTypes {EMPTYFIELDS, INVALIDNUMBER}
+    public void handleAddCarButton(ActionEvent actionEvent) {
+        if(validateInfo()) {
+            String reg = regText.getText();
+            String year = yearText.getText();
+            String make = makeText.getText();
+            String model = modelText.getText();
+            String price = priceText.getText();
+            String quantity = quantityText.getText();
+            String colors = color1Text.getText() + "," + color2Text.getText() + "," +
+                    color3Text.getText();
 
-    public void validateInfo() {
+            // Sending Request to the server to add new Car
+            Car newCar = new Car(reg, year, colors, make, model, price,quantity);
+            ClientManager.getInstance().sendRequest("ADD," + newCar);
+
+            // Clearing all the fields to add another
+            regText.clear();
+            yearText.clear();
+            makeText.clear();
+            modelText.clear();
+            priceText.clear();
+            quantityText.clear();
+            color1Text.clear();
+            color2Text.clear();
+            color3Text.clear();
+            addCarButton.setText("Add Another");
+            addCarButton.setMinWidth(120);
+        }
+    }
+
+    private enum AlertTypes {EMPTYFIELDS, INVALIDNUMBER}
+
+    public boolean validateInfo() {
         if(regText.getText().equals("") || yearText.getText().equals("") || makeText.getText().equals("") || color1Text.getText().equals("") ||
                 modelText.getText().equals("") || priceText.getText().equals("") || quantityText.getText().equals("")) {
             showAlert(AlertTypes.EMPTYFIELDS);
+            return false;
         } else {
             try {
                 Integer.parseInt(yearText.getText());
@@ -49,8 +87,10 @@ public class AddEditDialogController implements Initializable {
                 Integer.parseInt(quantityText.getText());
             } catch (NumberFormatException e) {
                 showAlert(AlertTypes.INVALIDNUMBER);
+                return false;
             }
         }
+        return true;
     }
 
     public void showAlert(AlertTypes alertType) {

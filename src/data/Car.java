@@ -74,8 +74,9 @@ public class Car {
 
     @Override
     public String toString() {
-        return reg + "," + year + "," + colors + "," + make + "," + model
-                + "," + price + "," + quantity;
+        return reg.get() + "," + year.get() + "," + colors.get()
+                + "," + make.get() + "," + model.get()
+                + "," + price.get() + "," + quantity.get();
     }
     public Button getEditButton() {
         return editButton;
@@ -87,34 +88,6 @@ public class Car {
 
     public Button getBuyButton() {
         return buyButton;
-    }
-
-    public void setReg(String reg) {
-        this.reg.set(reg);
-    }
-
-    public void setYear(String year) {
-        this.year.set(year);
-    }
-
-    public void setColors(String colors) {
-        this.colors.set(colors);
-    }
-
-    public void setMake(String make) {
-        this.make.set(make);
-    }
-
-    public void setModel(String model) {
-        this.model.set(model);
-    }
-
-    public void setPrice(String price) {
-        this.price.set(price);
-    }
-
-    public void setQuantity(String quantity) {
-        this.quantity.set(quantity);
     }
 // TODO: allow edit options
 }

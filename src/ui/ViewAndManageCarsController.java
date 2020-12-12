@@ -152,14 +152,6 @@ public class ViewAndManageCarsController {
         dialog.getDialogPane().getScene().getStylesheets().add(
                 getClass().getResource("uiStyles.css").toExternalForm());
         dialog.showAndWait();
-       /* Optional<ButtonType> result = dialog.showAndWait();
-        if(result.isPresent() && result.get() == ButtonType.OK) {
-            AddEditDialogController dialogController = loader.getController();
-            dialogController.validateInfo();
-            System.out.println("Okay pressed");
-        } else {
-            System.out.println("Cancel pressed");
-        }*/
     }
 
     private void setTableView() {

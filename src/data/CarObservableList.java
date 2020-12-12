@@ -3,6 +3,8 @@ package data;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.Iterator;
+
 public class CarObservableList {
     private static CarObservableList instance;
     private ObservableList<Car> carList;
@@ -24,5 +26,13 @@ public class CarObservableList {
 
     public void addCar(Car car) {
         carList.add(car);
+    }
+
+    /**
+     * Delete the car from the observableList
+     * @param reg Registration Number of the car to delete
+     */
+    public void deleteCar(String reg) {
+        carList.removeIf(car -> reg.equalsIgnoreCase(car.getReg()));
     }
 }

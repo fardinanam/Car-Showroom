@@ -6,10 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class Main extends Application{
     Stage window;
@@ -55,6 +57,29 @@ public class Main extends Application{
         window.setScene(new Scene(root, 900, 600));
         window.show();
     }
+
+    public boolean showAlertForConfirmation(String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(message);
+        alert.setHeaderText(message);
+        if(message.equals("Delete")) {
+            alert.setContentText("Do you really want to delete?");
+        }
+
+        // Adding uiStyles.css Alert box to add my own styles
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource("uiStyles.css").toExternalForm());
+        dialogPane.getStyleClass().add("myAlert");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void showAlertForInvalidLogin() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Incorrect Credentials");

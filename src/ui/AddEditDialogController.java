@@ -41,8 +41,10 @@ public class AddEditDialogController implements Initializable {
         yearText.setPromptText("Number Field");
         priceText.setPromptText("Number Field");
         quantityText.setPromptText("Number Field");
+        addCarButton.setDefaultButton(true);
     }
 
+    @FXML
     public void handleAddCarButton(ActionEvent actionEvent) {
         if(validateInfo()) {
             String reg = regText.getText();

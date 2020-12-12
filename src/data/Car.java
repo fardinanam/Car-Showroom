@@ -1,5 +1,6 @@
 package data;
 
+import client.ClientManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
 
@@ -28,6 +29,9 @@ public class Car {
         buyButton = new Button("Buy");
 
         // TODO: make setOnAction for all the buttons
+        deleteButton.setOnAction(e -> {
+            ClientManager.getInstance().sendRequest("DLT," + this.reg.get());
+        });
     }
 
     /*@Override

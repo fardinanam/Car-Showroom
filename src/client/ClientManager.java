@@ -60,10 +60,13 @@ public class ClientManager extends Thread {
     // TODO: Handle all server responses
     private void handleServerResponse(String serverResponse) throws IOException {
         String code = serverResponse.substring(0, 3);
+        String data = serverResponse.substring(4);
         if(code.equals("LIN")) {
             handleLogin(serverResponse);
         } else if (code.equals("car")) {
-            handleAddCar(serverResponse.substring(4));
+            handleAddCar(data);
+        } else if(code.equals("DLT")) {
+            handleDeleteCar(data);
         }
     }
 
@@ -104,6 +107,10 @@ public class ClientManager extends Thread {
         CarObservableList.getInstance().addCar(car);
     }
 
+    private void handleDeleteCar(String reg) {
+        CarObservableList.getInstance().deleteCar(reg);
+    }
+
     public static ClientManager getInstance() {
         if (instance == null) {
             instance = new ClientManager();
@@ -112,7 +119,18 @@ public class ClientManager extends Thread {
     }
 
     public void sendRequest(String request) {
-        requestToServer.println(request);
+        if(request.substring(0, 3).equals("DLT")) {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    if(main.showAlertForConfirmation("Delete")) {
+                        requestToServer.println(request);
+                    }
+                }
+            });
+        } else {
+            requestToServer.println(request);
+        }
     }
 
     public void setMain(Main main) {

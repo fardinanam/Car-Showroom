@@ -34,6 +34,7 @@ public class LoginController {
     /**
      * Invokes to change scene to viewers screen
      */
+    @FXML
     public void handleViewerButton(ActionEvent actionEvent) {
         try {
             main.showViewAndManageCarsPage("Viewer");
@@ -42,6 +43,7 @@ public class LoginController {
         }
     }
 
+    @FXML
     public void handleManufacturerButton(ActionEvent actionEvent) {
         loginOptions.setVisible(true);
         loginButton.setDefaultButton(true);
@@ -51,7 +53,8 @@ public class LoginController {
         this.main = main;
     }
 
-    public void handleLoginButton(ActionEvent actionEvent) throws InterruptedException {
+    @FXML
+    public void handleLoginButton(ActionEvent actionEvent) {
         String un = username.getText();
         String pass = password.getText();
         String request = "LIN," + un + "," + pass;
@@ -65,6 +68,7 @@ public class LoginController {
         password.setText("");
     }
 
+    @FXML
     public void handleCancelButton(ActionEvent actionEvent) {
         loginOptions.setVisible(false);
     }

@@ -50,7 +50,7 @@
             <TextField fx:id="quantityText" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <children>
-                  <Button fx:id="addCarButton" mnemonicParsing="false" onAction="#handleAddCarButton" text="Add" />
+                  <Button fx:id="addCarButton" mnemonicParsing="false" onAction="#handleAddCarButton" text="Add Car" />
                </children>
             </HBox>
          </children>

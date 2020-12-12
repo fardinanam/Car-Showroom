@@ -17,7 +17,7 @@
     -fx-background-radius: 15px;
     -fx-min-height: 25px;
     -fx-background-insets: 0 0 5 0;
-    -fx-padding: 0 0 10 0;
+    -fx-padding: 0 0 5 0;
 }
 .table-view .column-header, .table-view .filler {
     -fx-cell-size: 40;

@@ -96,6 +96,7 @@ public class ViewAndManageCarsController {
             for(Car car : CarObservableList.getInstance().getCarList()) {
                 if(car.getReg().equalsIgnoreCase(search)) {
                     list.add(car);
+                    break;
                 }
             }
         } else if(!search.contains(",")) {

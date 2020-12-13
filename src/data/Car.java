@@ -79,6 +79,18 @@ public class Car {
         return quantity.get();
     }
 
+    public Button getEditButton() {
+        return editButton;
+    }
+
+    public Button getDeleteButton() {
+        return deleteButton;
+    }
+
+    public Button getBuyButton() {
+        return buyButton;
+    }
+
     @Override
     public String toString() {
         return reg.get() + "," + year.get() + "," + colors.get()

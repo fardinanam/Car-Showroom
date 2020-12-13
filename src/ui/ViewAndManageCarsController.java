@@ -33,6 +33,10 @@ public class ViewAndManageCarsController {
     private String username;
     private Main main;
 
+    /**
+     * Initializes to show necessary information depending on the type
+     * of user who is logged in.
+     */
     public void init(String username) {
         this.username = username;
         setTableView();
@@ -53,6 +57,9 @@ public class ViewAndManageCarsController {
         showAddDialog();
     }
 
+    /**
+     * Wants confirmation before the user finally logs out
+     */
     @FXML
     public void handleLogoutButton(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -76,6 +83,11 @@ public class ViewAndManageCarsController {
         });
     }
 
+    /**
+     * Searches from the list either on make or model or on registration no.
+     * depending on which option the user selects from the comboBox. Then displays
+     * the results in the tableView
+     */
     @FXML
     public void handleSearchButton(ActionEvent actionEvent) {
         ObservableList<Car> list = FXCollections.observableArrayList();
@@ -116,6 +128,10 @@ public class ViewAndManageCarsController {
         }
     }
 
+    /**
+     * Shows all the cars in the table. This button is initially disabled.
+     * It only enables when the user presses the search Button
+     */
     @FXML
     public void handleViewAllButton() {
         tableView.setItems(CarObservableList.getInstance().getCarList());
@@ -123,14 +139,13 @@ public class ViewAndManageCarsController {
 
     }
 
+    /**
+     * Shows prompt text in the search bar depending on the option the user
+     * chooses from the comboBox search options
+     */
     @FXML
     public void handleSearchOptions(ActionEvent actionEvent) {
         searchText.setPromptText("Search by " + searchOptions.getValue());
-    }
-
-    @FXML
-    public void handleSearchField(ActionEvent event) {
-        searchButton.setDefaultButton(true);
     }
 
     /**
@@ -161,6 +176,11 @@ public class ViewAndManageCarsController {
         dialog.showAndWait();
     }
 
+    /**
+     * Sets up the tableView with appropriate columns. Viewer can only see Buy Button
+     * but a Manufacturer can see Edit and Delete Buttons with separated columns.
+     * It parses data from the CarObservableList class
+     */
     private void setTableView() {
         TableColumn<Car, String> regCol = new TableColumn<>("Registration No.");
         regCol.setMinWidth(120);

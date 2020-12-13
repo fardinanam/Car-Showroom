@@ -43,6 +43,9 @@ public class Main extends Application{
         window.show();
     }
 
+    /**
+     * Changes the scene to viewer's or manufacturer's page depending on the username
+     */
     public void showViewAndManageCarsPage(String username) throws IOException {
         // Loading viewAndManageCars.fxml
         FXMLLoader loader = new FXMLLoader();
@@ -60,6 +63,9 @@ public class Main extends Application{
         window.show();
     }
 
+    /**
+     * Shows alert to confirm delete or buy command
+     */
     public boolean showAlertForConfirmation(String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(message);
@@ -116,6 +122,9 @@ public class Main extends Application{
         dialog.showAndWait();
     }
 
+    /**
+     * Alerts if the login information are not valid
+     */
     public void showAlertForInvalidLogin() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Incorrect Credentials");

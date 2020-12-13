@@ -3,8 +3,6 @@ package data;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.Iterator;
-
 public class CarObservableList {
     private static CarObservableList instance;
     private final ObservableList<Car> carList;

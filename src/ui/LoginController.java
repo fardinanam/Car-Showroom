@@ -43,6 +43,9 @@ public class LoginController {
         }
     }
 
+    /**
+     * Invokes to change scene to Manufacturer screen
+     */
     @FXML
     public void handleManufacturerButton(ActionEvent actionEvent) {
         loginOptions.setVisible(true);
@@ -53,6 +56,9 @@ public class LoginController {
         this.main = main;
     }
 
+    /**
+     * Shows login form in the login screen
+     */
     @FXML
     public void handleLoginButton(ActionEvent actionEvent) {
         String un = username.getText();
@@ -68,6 +74,9 @@ public class LoginController {
         password.setText("");
     }
 
+    /**
+     * Hides login form
+     */
     @FXML
     public void handleCancelButton(ActionEvent actionEvent) {
         loginOptions.setVisible(false);

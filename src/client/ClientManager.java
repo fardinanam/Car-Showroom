@@ -57,7 +57,12 @@ public class ClientManager extends Thread {
         }
     }
 
-    // TODO: Handle all server responses
+    /**
+     * @param serverResponse Comma separated String. First argument denotes the type of response
+     * Format - For login response: "LIN(login),Username"
+     *          For Add car command: "car,(Comma separated car information)"
+     *          For Delete response: "DLT,Registration number of the car"
+     */
     private void handleServerResponse(String serverResponse) throws IOException {
         String code = serverResponse.substring(0, 3);
         String data = serverResponse.substring(4);
@@ -71,8 +76,10 @@ public class ClientManager extends Thread {
     }
 
     /**
-     * @param serverResponse contains comma separated information where first word = LIN
-     * second word contains login approval and third word is the username of the user
+     * Takes server response and calls showViewAndManageCarsPage(username) from main
+     * to change the window to manufacturer's page. Else shows an Alert for invalid login.
+     * @param serverResponse contains comma separated information
+     *        Format - "LIN(login),Username"
      */
     private void handleLogin(String serverResponse) {
         String[] responses = serverResponse.split(",");
@@ -98,27 +105,34 @@ public class ClientManager extends Thread {
         }
     }
 
+    /**
+     * Adds car to the CarObservableList
+     * @param carInfoString comma separated car information.
+     *        Format - reg,year,color1,color2,color3,make,model,price,quantity
+     */
     private void handleAddCar(String carInfoString) {
         String[] carInfo = carInfoString.split(",");
         String colors = carInfo[2] + "," + carInfo[3] + "," + carInfo[4];
         Car car = new Car(carInfo[0], carInfo[1], colors,
                 carInfo[5], carInfo[6], carInfo[7], carInfo[8]);
         car.setMain(main);
-//        System.out.println(car);
         CarObservableList.getInstance().addCar(car);
     }
 
+    /**
+     * @param reg Registration number of the car that will be deleted
+     */
     private void handleDeleteCar(String reg) {
         CarObservableList.getInstance().deleteCar(reg);
     }
 
-    public static ClientManager getInstance() {
-        if (instance == null) {
-            instance = new ClientManager();
-        }
-        return instance;
-    }
-
+    /**
+     * Sends request to the server.
+     * Format - For login request: "LIN(login),Username,Pass"
+     *          For Add request: "ADD,(Comma separated car information)"
+     *          For Delete request: "DLT,Registration number of the car"
+     *          For Buy request: "BUY,(Comma separated car information)"
+     */
     public void sendRequest(String request) {
         String code = request.substring(0, 3);
         if(code.equals("DLT")) {
@@ -141,5 +155,12 @@ public class ClientManager extends Thread {
 
     public void setMain(Main main) {
         this.main = main;
+    }
+
+    public static ClientManager getInstance() {
+        if (instance == null) {
+            instance = new ClientManager();
+        }
+        return instance;
     }
 }

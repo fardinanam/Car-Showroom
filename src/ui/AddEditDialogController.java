@@ -37,6 +37,11 @@ public class AddEditDialogController implements Initializable {
     @FXML
     private TextField color3Text;
 
+    private enum AlertTypes {EMPTYFIELDS, INVALIDNUMBER}
+
+    /**
+     * Initializes the addEdit dialog with all necessary information for adding a car
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // When it opens as addCar dialog, edit button has to be hidden
@@ -48,6 +53,10 @@ public class AddEditDialogController implements Initializable {
         addCar.setDefaultButton(true);
     }
 
+    /**
+     * Creates a data.Car object from all the information taken from the text fields
+     * of the dialog box
+     */
     private Car makeCar() {
         String reg = regText.getText();
         String year = yearText.getText();
@@ -61,6 +70,10 @@ public class AddEditDialogController implements Initializable {
         return new Car(reg, year, colors, make, model, price,quantity);
     }
 
+    /**
+     * Clears all the fields and changes the text of the button to add another
+     * if provided information are valid.
+     */
     @FXML
     public void handleAddCarButton(ActionEvent actionEvent) {
         if(validateInfo()) {
@@ -81,6 +94,9 @@ public class AddEditDialogController implements Initializable {
         }
     }
 
+    /**
+     * Requests the server to edit a car if provided data are valid
+     */
     @FXML
     private void handleEditCarButton(ActionEvent event) {
         if(validateInfo()) {
@@ -88,8 +104,10 @@ public class AddEditDialogController implements Initializable {
         }
     }
 
-    private enum AlertTypes {EMPTYFIELDS, INVALIDNUMBER}
-
+    /**
+     * Checks if all the information that are provided are valid or not.
+     * If not, it invokes an alert.
+     */
     public boolean validateInfo() {
         if(regText.getText().equals("") || yearText.getText().equals("") || makeText.getText().equals("") || color1Text.getText().equals("") ||
                 modelText.getText().equals("") || priceText.getText().equals("") || quantityText.getText().equals("")) {
@@ -108,6 +126,9 @@ public class AddEditDialogController implements Initializable {
         return true;
     }
 
+    /**
+     * Alert box to show the kind of invalid data input
+     */
     public void showAlert(AlertTypes alertType) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Invalid Input");
@@ -130,7 +151,8 @@ public class AddEditDialogController implements Initializable {
     }
 
     /**
-     * Fills the fields of addEditDialog with the car info that is to be edited
+     * Fills the fields of addEditDialog with the car info that is to be edited.
+     * Hides the Add Button.
      */
     public void setForEdit(Car car) {
         // Hiding addCar button

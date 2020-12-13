@@ -6,6 +6,7 @@ import data.CarObservableList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -13,8 +14,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
-import java.util.Optional;
-
 
 public class ViewAndManageCarsController {
     @FXML
@@ -23,6 +22,8 @@ public class ViewAndManageCarsController {
     private Button viewAllButton;
     @FXML
     private TableView<Car> tableView;
+    @FXML
+    private Button searchButton;
     @FXML
     private Button addCarButton;
     @FXML
@@ -47,8 +48,9 @@ public class ViewAndManageCarsController {
         this.main = main;
     }
 
+    @FXML
     public void handleAddCar(ActionEvent actionEvent) {
-        showAddEditDialog();
+        showAddDialog();
     }
 
     @FXML
@@ -126,10 +128,15 @@ public class ViewAndManageCarsController {
         searchText.setPromptText("Search by " + searchOptions.getValue());
     }
 
+    @FXML
+    public void handleSearchField(ActionEvent event) {
+        searchButton.setDefaultButton(true);
+    }
+
     /**
      * Loading the dialog when add or edit button is pressed
      */
-    public void showAddEditDialog() {
+    public void showAddDialog() {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(viewerContainer.getScene().getWindow());
 
@@ -144,8 +151,8 @@ public class ViewAndManageCarsController {
             return;
         }
 
+        dialog.setTitle("Add Car");
         // Adding buttons
-//        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
 
         // Adding styleSheet

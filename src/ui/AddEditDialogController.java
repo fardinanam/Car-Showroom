@@ -9,14 +9,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddEditDialogController implements Initializable {
     @FXML
-    private Button addCarButton;
+    private Button addCar;
+    @FXML
+    private Button editCar;
     @FXML
     private TextField regText;
     @FXML
@@ -38,28 +39,33 @@ public class AddEditDialogController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // When it opens as addCar dialog, edit button has to be hidden
+        editCar.setVisible(false);
+
         yearText.setPromptText("Number Field");
         priceText.setPromptText("Number Field");
         quantityText.setPromptText("Number Field");
-        addCarButton.setDefaultButton(true);
+        addCar.setDefaultButton(true);
+    }
+
+    private Car makeCar() {
+        String reg = regText.getText();
+        String year = yearText.getText();
+        String make = makeText.getText();
+        String model = modelText.getText();
+        String price = priceText.getText();
+        String quantity = quantityText.getText();
+        String colors = color1Text.getText() + "," + color2Text.getText() + "," +
+                color3Text.getText();
+
+        return new Car(reg, year, colors, make, model, price,quantity);
     }
 
     @FXML
     public void handleAddCarButton(ActionEvent actionEvent) {
         if(validateInfo()) {
-            String reg = regText.getText();
-            String year = yearText.getText();
-            String make = makeText.getText();
-            String model = modelText.getText();
-            String price = priceText.getText();
-            String quantity = quantityText.getText();
-            String colors = color1Text.getText() + "," + color2Text.getText() + "," +
-                    color3Text.getText();
-
             // Sending Request to the server to add new Car
-            Car newCar = new Car(reg, year, colors, make, model, price,quantity);
-            ClientManager.getInstance().sendRequest("ADD," + newCar);
-
+            ClientManager.getInstance().sendRequest("ADD," + makeCar());
             // Clearing all the fields to add another
             regText.clear();
             yearText.clear();
@@ -70,8 +76,15 @@ public class AddEditDialogController implements Initializable {
             color1Text.clear();
             color2Text.clear();
             color3Text.clear();
-            addCarButton.setText("Add Another");
-            addCarButton.setMinWidth(120);
+            addCar.setText("Add Another");
+            addCar.setMinWidth(120);
+        }
+    }
+
+    @FXML
+    private void handleEditCarButton(ActionEvent event) {
+        if(validateInfo()) {
+            ClientManager.getInstance().sendRequest("EDT," + makeCar());
         }
     }
 
@@ -97,7 +110,7 @@ public class AddEditDialogController implements Initializable {
 
     public void showAlert(AlertTypes alertType) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Incorrect Credentials");
+        alert.setTitle("Invalid Input");
 
         if(alertType == AlertTypes.EMPTYFIELDS) {
             alert.setHeaderText("Empty Field/s");
@@ -114,5 +127,34 @@ public class AddEditDialogController implements Initializable {
         dialogPane.getStyleClass().add("myAlert");
 
         alert.showAndWait();
+    }
+
+    /**
+     * Fills the fields of addEditDialog with the car info that is to be edited
+     */
+    public void setForEdit(Car car) {
+        // Hiding addCar button
+        addCar.setDefaultButton(false);
+        addCar.setManaged(false);
+        addCar.managedProperty().bind(addCar.visibleProperty());
+        addCar.setVisible(false);
+        // Edit button is initialized to hidden, So making it visible
+        editCar.setVisible(true);
+        editCar.setDefaultButton(true);
+
+        regText.setText(car.getReg());
+        yearText.setText(car.getYear());
+        makeText.setText(car.getMake());
+        modelText.setText(car.getModel());
+        priceText.setText(car.getPrice());
+        quantityText.setText(car.getQuantity());
+        String[] colors = car.getColors().split(",");
+        color1Text.setText(colors[0]);
+        try {
+            color2Text.setText(colors[1]);
+            color2Text.setText(colors[2]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // Nothing happens
+        }
     }
 }

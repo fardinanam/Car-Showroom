@@ -1,12 +1,14 @@
 package ui;
 
 import client.ClientManager;
+import data.Car;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
 
@@ -64,6 +66,8 @@ public class Main extends Application{
         alert.setHeaderText(message);
         if(message.equals("Delete")) {
             alert.setContentText("Do you really want to delete?");
+        } else if(message.split(" ")[0].equals("Buy")) {
+            alert.setContentText("Do you really want to " + message + "?");
         }
 
         // Adding uiStyles.css Alert box to add my own styles
@@ -78,6 +82,38 @@ public class Main extends Application{
         } else {
             return false;
         }
+    }
+
+    /**
+     * Opens the addEditDialog and calls the setForEdit method
+     * to set the dialog box for editing purpose
+     */
+    public void showEditDialog(Car car) {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(window);
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("addEditDialog.fxml"));
+
+
+        try {
+            dialog.getDialogPane().setContent(loader.load());
+        } catch (IOException e) {
+            System.out.println("Couldn't load dialog");
+            e.printStackTrace();
+            return;
+        }
+
+        dialog.setTitle("Edit Car");
+        AddEditDialogController controller = loader.getController();
+        controller.setForEdit(car);
+        // Adding buttons
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        // Adding styleSheet
+        dialog.getDialogPane().getScene().getStylesheets().add(
+                ViewAndManageCarsController.class.getResource("uiStyles.css").toExternalForm());
+        dialog.showAndWait();
     }
 
     public void showAlertForInvalidLogin() {

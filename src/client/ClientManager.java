@@ -103,6 +103,7 @@ public class ClientManager extends Thread {
         String colors = carInfo[2] + "," + carInfo[3] + "," + carInfo[4];
         Car car = new Car(carInfo[0], carInfo[1], colors,
                 carInfo[5], carInfo[6], carInfo[7], carInfo[8]);
+        car.setMain(main);
 //        System.out.println(car);
         CarObservableList.getInstance().addCar(car);
     }
@@ -119,7 +120,8 @@ public class ClientManager extends Thread {
     }
 
     public void sendRequest(String request) {
-        if(request.substring(0, 3).equals("DLT")) {
+        String code = request.substring(0, 3);
+        if(code.equals("DLT")) {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -128,6 +130,10 @@ public class ClientManager extends Thread {
                     }
                 }
             });
+        } else if(code.equals("EDT")) {
+            String carInfo = request.substring(4);
+            requestToServer.println("DLT," + carInfo.split(",")[0]);
+            requestToServer.println("ADD," + carInfo);
         } else {
             requestToServer.println(request);
         }

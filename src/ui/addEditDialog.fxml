@@ -48,9 +48,10 @@
             <TextField fx:id="modelText" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="priceText" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <TextField fx:id="quantityText" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <children>
-                  <Button fx:id="addCarButton" mnemonicParsing="false" onAction="#handleAddCarButton" text="Add Car" />
+                  <Button fx:id="editCar" mnemonicParsing="false" onAction="#handleEditCarButton" text="Edit Car" />
+                  <Button fx:id="addCar" mnemonicParsing="false" onAction="#handleAddCarButton" text="Add Car" />
                </children>
             </HBox>
          </children>

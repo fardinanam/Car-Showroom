@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 public class CarObservableList {
     private static CarObservableList instance;
-    private ObservableList<Car> carList;
+    private final ObservableList<Car> carList;
 
     private CarObservableList() {
         carList = FXCollections.observableArrayList();
@@ -29,7 +29,7 @@ public class CarObservableList {
     }
 
     /**
-     * Delete the car from the observableList
+     * Deletes the car from the observableList
      * @param reg Registration Number of the car to delete
      */
     public void deleteCar(String reg) {

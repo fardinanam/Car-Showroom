@@ -43,6 +43,10 @@
 .label {
     -fx-font-weight: bold;
 }
+
+#topLabel {
+    -fx-font-size: 20px;
+}
 .button {
     -fx-pref-width: 80px;
     -fx-pref-height: 10px;
@@ -67,7 +71,6 @@
     -fx-effect: dropshadow(gaussian, black, 6, 0, 1, 1);
 
 }
-
 #viewerButton, #manufacturerButton {
     -fx-pref-width: 200px;
     -fx-pref-height: 40px;

@@ -192,7 +192,7 @@ public class ViewAndManageCarsController {
         yearCol.setCellValueFactory(new PropertyValueFactory<>("year"));
 
         TableColumn<Car, String> colorsCol = new TableColumn<>("Colors");
-        colorsCol.setMinWidth(90);
+        colorsCol.setMinWidth(110);
         colorsCol.setCellValueFactory(new PropertyValueFactory<>("colors"));
 
         TableColumn<Car, String> makeCol = new TableColumn<>("Make");

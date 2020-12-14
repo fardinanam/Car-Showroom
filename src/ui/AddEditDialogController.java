@@ -5,15 +5,14 @@ import data.Car;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddEditDialogController implements Initializable {
+    @FXML
+    private Label topLabel;
     @FXML
     private Button addCar;
     @FXML
@@ -135,7 +134,7 @@ public class AddEditDialogController implements Initializable {
 
         if(alertType == AlertTypes.EMPTYFIELDS) {
             alert.setHeaderText("Empty Field/s");
-            alert.setContentText("All fields except last two color fields can not be empty");
+            alert.setContentText("Any field except last two color fields can not be empty");
         } else if(alertType == AlertTypes.INVALIDNUMBER) {
             alert.setHeaderText("Text in Number fields");
             alert.setContentText("Year, price and quantity have to be Integers");
@@ -164,6 +163,7 @@ public class AddEditDialogController implements Initializable {
         editCar.setVisible(true);
         editCar.setDefaultButton(true);
 
+        topLabel.setText("Edit Car Information");
         regText.setText(car.getReg());
         yearText.setText(car.getYear());
         makeText.setText(car.getMake());

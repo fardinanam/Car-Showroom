@@ -60,7 +60,7 @@
    <header>
       <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="46.0" prefWidth="578.0">
          <children>
-            <Label text="Enter Car Information" />
+            <Label fx:id="topLabel" text="Enter Car Information" />
          </children>
       </HBox>
    </header>

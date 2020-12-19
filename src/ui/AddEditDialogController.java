@@ -14,10 +14,6 @@ public class AddEditDialogController implements Initializable {
     @FXML
     private Label topLabel;
     @FXML
-    private Button addCar;
-    @FXML
-    private Button editCar;
-    @FXML
     private TextField regText;
     @FXML
     private TextField yearText;
@@ -43,20 +39,16 @@ public class AddEditDialogController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // When it opens as addCar dialog, edit button has to be hidden
-        editCar.setVisible(false);
-
         yearText.setPromptText("Number Field");
         priceText.setPromptText("Number Field");
         quantityText.setPromptText("Number Field");
-        addCar.setDefaultButton(true);
     }
 
     /**
      * Creates a data.Car object from all the information taken from the text fields
      * of the dialog box
      */
-    private Car makeCar() {
+    public Car makeCar() {
         String reg = regText.getText();
         String year = yearText.getText();
         String make = makeText.getText();
@@ -73,7 +65,7 @@ public class AddEditDialogController implements Initializable {
      * Clears all the fields and changes the text of the button to add another
      * if provided information are valid.
      */
-    @FXML
+   /* @FXML
     public void handleAddCarButton(ActionEvent actionEvent) {
         if(validateInfo()) {
             // Sending Request to the server to add new Car
@@ -91,6 +83,21 @@ public class AddEditDialogController implements Initializable {
             addCar.setText("Add Another");
             addCar.setMinWidth(120);
         }
+    }*/
+
+    /**
+     * Clears all the fields
+     */
+    public void clear() {
+        regText.clear();
+        yearText.clear();
+        makeText.clear();
+        modelText.clear();
+        priceText.clear();
+        quantityText.clear();
+        color1Text.clear();
+        color2Text.clear();
+        color3Text.clear();
     }
 
     /**
@@ -154,15 +161,6 @@ public class AddEditDialogController implements Initializable {
      * Hides the Add Button.
      */
     public void setForEdit(Car car) {
-        // Hiding addCar button
-        addCar.setDefaultButton(false);
-        addCar.setManaged(false);
-        addCar.managedProperty().bind(addCar.visibleProperty());
-        addCar.setVisible(false);
-        // Edit button is initialized to hidden, So making it visible
-        editCar.setVisible(true);
-        editCar.setDefaultButton(true);
-
         topLabel.setText("Edit Car Information");
         regText.setText(car.getReg());
         yearText.setText(car.getYear());

@@ -34,12 +34,24 @@
     /*-fx-text-fill: white;*/
 }
 .table-row-cell {
-    -fx-border-radius: 15px;
+    -fx-border-width: 0 0 0 0;
     -fx-background-radius: 15px;
     -fx-max-height: 10px;
     -fx-background-insets: 0 0 0 0;
 }
 
+.table-row-cell:selected {
+    -fx-background-color: #173f5f;
+}
+
+.table-row-cell:selected .cell {
+    -fx-text-fill: white;
+    -fx-border-width: 0 0 0 0;
+}
+
+.cell {
+    -fx-alignment: center;
+}
 .label {
     -fx-font-weight: bold;
 }

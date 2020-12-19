@@ -3,13 +3,11 @@ package ui;
 import client.ClientManager;
 import data.Car;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -114,12 +112,28 @@ public class Main extends Application{
         AddEditDialogController controller = loader.getController();
         controller.setForEdit(car);
         // Adding buttons
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+        ButtonType editButton = new ButtonType("Edit Car", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(editButton, ButtonType.CANCEL);
 
+        // Setting up data validation on add car button
+        Button editButtonInDialog = (Button)dialog.getDialogPane().lookupButton(editButton);
+        editButtonInDialog.addEventFilter(ActionEvent.ACTION, event -> {
+            if(!controller.validateInfo()) {
+                event.consume();
+            }
+        });
         // Adding styleSheet
         dialog.getDialogPane().getScene().getStylesheets().add(
-                ViewAndManageCarsController.class.getResource("uiStyles.css").toExternalForm());
-        dialog.showAndWait();
+                getClass().getResource("uiStyles.css").toExternalForm());
+        Optional<ButtonType> result = dialog.showAndWait();
+
+        // Adding car
+        if(result.isPresent() && result.get() == editButton) {
+            // Sending Request to the server to add new Car
+            ClientManager.getInstance().sendRequest("EDT," + controller.makeCar());
+            // Clearing all the fields to add another
+            controller.clear();
+        }
     }
 
     /**

@@ -1,5 +1,6 @@
 package ui;
 
+import client.ClientManager;
 import data.Car;
 import data.CarObservableList;
 
@@ -14,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class ViewAndManageCarsController {
     @FXML
@@ -166,15 +168,33 @@ public class ViewAndManageCarsController {
             e.printStackTrace();
             return;
         }
+        // Getting the dialog controller
+        AddEditDialogController controller = loader.getController();
 
         dialog.setTitle("Add Car");
         // Adding buttons
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+        ButtonType add = new ButtonType("Add Car", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(add, ButtonType.CANCEL);
 
+        // Setting up data validation on add car button
+        Button addButtonInDialog = (Button)dialog.getDialogPane().lookupButton(add);
+        addButtonInDialog.addEventFilter(ActionEvent.ACTION, event -> {
+            if(!controller.validateInfo()) {
+                event.consume();
+            }
+        });
         // Adding styleSheet
         dialog.getDialogPane().getScene().getStylesheets().add(
                 getClass().getResource("uiStyles.css").toExternalForm());
-        dialog.showAndWait();
+        Optional<ButtonType> result = dialog.showAndWait();
+
+        // Adding car
+        if(result.isPresent() && result.get() == add) {
+            // Sending Request to the server to add new Car
+            ClientManager.getInstance().sendRequest("ADD," + controller.makeCar());
+            // Clearing all the fields to add another
+            controller.clear();
+        }
     }
 
     /**

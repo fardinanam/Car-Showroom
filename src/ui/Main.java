@@ -89,7 +89,7 @@ public class Main extends Application{
     }
 
     /**
-     * Opens the addEditDialog and calls the setForEdit method
+     * Opens the addEditDialog and adds the Edit Car button
      * to set the dialog box for editing purpose
      */
     public void showEditDialog(Car car) {
@@ -115,7 +115,7 @@ public class Main extends Application{
         ButtonType editButton = new ButtonType("Edit Car", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(editButton, ButtonType.CANCEL);
 
-        // Setting up data validation on add car button
+        // Setting up data validation on edit car button
         Button editButtonInDialog = (Button)dialog.getDialogPane().lookupButton(editButton);
         editButtonInDialog.addEventFilter(ActionEvent.ACTION, event -> {
             if(!controller.validateInfo()) {
@@ -129,10 +129,8 @@ public class Main extends Application{
 
         // Adding car
         if(result.isPresent() && result.get() == editButton) {
-            // Sending Request to the server to add new Car
+            // Sending Request to the server to edit new Car
             ClientManager.getInstance().sendRequest("EDT," + controller.makeCar());
-            // Clearing all the fields to add another
-            controller.clear();
         }
     }
 

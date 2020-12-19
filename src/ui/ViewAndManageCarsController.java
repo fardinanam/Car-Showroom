@@ -7,7 +7,6 @@ import data.CarObservableList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -152,7 +151,8 @@ public class ViewAndManageCarsController {
     }
 
     /**
-     * Loading the dialog when add or edit button is pressed
+     * Loading the dialog when Add Car button is pressed
+     * and adds an Add Car button to set it up for adding cars
      */
     public void showAddDialog() {
         Dialog<ButtonType> dialog = new Dialog<>();
@@ -192,8 +192,6 @@ public class ViewAndManageCarsController {
         if(result.isPresent() && result.get() == add) {
             // Sending Request to the server to add new Car
             ClientManager.getInstance().sendRequest("ADD," + controller.makeCar());
-            // Clearing all the fields to add another
-            controller.clear();
         }
     }
 

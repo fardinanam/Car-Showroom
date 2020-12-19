@@ -62,45 +62,6 @@ public class AddEditDialogController implements Initializable {
     }
 
     /**
-     * Clears all the fields and changes the text of the button to add another
-     * if provided information are valid.
-     */
-   /* @FXML
-    public void handleAddCarButton(ActionEvent actionEvent) {
-        if(validateInfo()) {
-            // Sending Request to the server to add new Car
-            ClientManager.getInstance().sendRequest("ADD," + makeCar());
-            // Clearing all the fields to add another
-            regText.clear();
-            yearText.clear();
-            makeText.clear();
-            modelText.clear();
-            priceText.clear();
-            quantityText.clear();
-            color1Text.clear();
-            color2Text.clear();
-            color3Text.clear();
-            addCar.setText("Add Another");
-            addCar.setMinWidth(120);
-        }
-    }*/
-
-    /**
-     * Clears all the fields
-     */
-    public void clear() {
-        regText.clear();
-        yearText.clear();
-        makeText.clear();
-        modelText.clear();
-        priceText.clear();
-        quantityText.clear();
-        color1Text.clear();
-        color2Text.clear();
-        color3Text.clear();
-    }
-
-    /**
      * Requests the server to edit a car if provided data are valid
      */
     @FXML

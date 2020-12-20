@@ -139,7 +139,7 @@ public class ClientManager extends Thread {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    if(main.showAlertForConfirmation("Delete")) {
+                    if(main.showAlertForConfirmation("Delete " + request.split(",")[1])) {
                         requestToServer.println(request);
                     }
                 }

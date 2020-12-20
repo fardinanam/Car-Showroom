@@ -66,10 +66,10 @@ public class Main extends Application{
      */
     public boolean showAlertForConfirmation(String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(message);
+//        alert.setTitle(message);
         alert.setHeaderText(message);
-        if(message.equals("Delete")) {
-            alert.setContentText("Do you really want to delete?");
+        if(message.substring(0, 6).equals("Delete")) {
+            alert.setContentText("Do you really want to " + message + "?");
         } else if(message.split(" ")[0].equals("Buy")) {
             alert.setContentText("Do you really want to " + message + "?");
         }
@@ -113,6 +113,7 @@ public class Main extends Application{
         controller.setForEdit(car);
         // Adding buttons
         ButtonType editButton = new ButtonType("Edit Car", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         dialog.getDialogPane().getButtonTypes().addAll(editButton, ButtonType.CANCEL);
 
         // Setting up data validation on edit car button

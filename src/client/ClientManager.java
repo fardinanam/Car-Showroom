@@ -72,6 +72,13 @@ public class ClientManager extends Thread {
             handleAddCar(data);
         } else if(code.equals("DLT")) {
             handleDeleteCar(data);
+        } else {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    main.showPopup(serverResponse);
+                }
+            });
         }
     }
 
@@ -90,6 +97,7 @@ public class ClientManager extends Thread {
                 public void run() {
                     try {
                         main.showViewAndManageCarsPage(username);
+                        main.showPopup("Welcome Back " + username);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

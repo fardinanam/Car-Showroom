@@ -152,6 +152,13 @@ public class Main extends Application{
 
         alert.showAndWait();
     }
+
+    /**
+     * Shows pop up notification
+     */
+    public void showPopup(String message) {
+        Toast.makeText(window, message, 2000, 500, 500);
+    }
     @Override
     public void stop() {
         ClientManager.getInstance().sendRequest("exit");

@@ -24,8 +24,6 @@ public class ViewAndManageCarsController {
     @FXML
     private TableView<Car> tableView;
     @FXML
-    private Button searchButton;
-    @FXML
     private Button addCarButton;
     @FXML
     private ComboBox searchOptions;
@@ -77,6 +75,7 @@ public class ViewAndManageCarsController {
             if(response == ButtonType.OK) {
                 try {
                     main.showLoginPage();
+                    main.showPopup("Successfully Logged Out");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -123,6 +122,9 @@ public class ViewAndManageCarsController {
                     list.add(car);
                 }
             }
+        }
+        if(list.size() == 0) {
+            main.showPopup("No Car matches with the " + searchOptions.getValue() + " " + searchText.getText());
         }
         tableView.setItems(list);
         if(viewAllButton.isDisabled()) {

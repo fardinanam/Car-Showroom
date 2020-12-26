@@ -33,8 +33,12 @@ public final class Toast {
 
         StackPane root = new StackPane(text);
         root.setStyle("-fx-background-radius: 20; -fx-background-color: #3caea3; -fx-padding: 5px;");
-        root.translateYProperty().set(ownerStageScene.getHeight());
+//        root.translateYProperty().set(ownerStageScene.getHeight());
         root.setOpacity(0);
+
+        root.setPrefWidth(ownerStage.getWidth() - 16);
+        toastStage.setY(ownerStage.getY() + ownerStage.getHeight() - 32);
+        toastStage.setX(ownerStage.getX() + 8);
 
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);

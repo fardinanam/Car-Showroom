@@ -1,0 +1,12 @@
+# intelliJ
+.idea
+*.iml
+
+# compiled classes
+*.class
+
+# Log files
+*.log
+
+# lib
+lib.xml

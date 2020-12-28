@@ -1,5 +1,5 @@
 # intelliJ
-.idea
+**/.idea
 *.iml
 
 # compiled classes
@@ -7,6 +7,3 @@
 
 # Log files
 *.log
-
-# lib
-lib.xml
